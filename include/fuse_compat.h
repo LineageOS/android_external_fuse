@@ -9,6 +9,8 @@
 /* these definitions provide source compatibility to prior versions.
    Do not include this file directly! */
 
+#include "fuse_lowlevel.h"
+
 struct fuse_operations_compat25 {
 	int (*getattr) (const char *, struct stat *);
 	int (*readlink) (const char *, char *, size_t);

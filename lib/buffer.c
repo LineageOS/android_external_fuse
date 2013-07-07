@@ -45,7 +45,7 @@ static ssize_t fuse_buf_write(const struct fuse_buf *dst, size_t dst_off,
 
 	while (len) {
 		if (dst->flags & FUSE_BUF_FD_SEEK) {
-			res = pwrite(dst->fd, src->mem + src_off, len,
+			res = pwrite64(dst->fd, src->mem + src_off, len,
 				     dst->pos + dst_off);
 		} else {
 			res = write(dst->fd, src->mem + src_off, len);

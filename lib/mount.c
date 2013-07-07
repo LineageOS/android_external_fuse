@@ -42,6 +42,10 @@
 #define FUSERMOUNT_PROG		"fusermount"
 #define FUSE_COMMFD_ENV		"_FUSE_COMMFD"
 
+#if defined(__ANDROID__) && !defined(FUSERMOUNT_DIR)
+# define FUSERMOUNT_DIR "/system/xbin"
+#endif
+
 #ifndef HAVE_FORK
 #define fork() vfork()
 #endif

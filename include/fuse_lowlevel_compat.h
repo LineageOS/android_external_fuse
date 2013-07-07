@@ -9,6 +9,8 @@
 /* these definitions provide source compatibility to prior versions.
    Do not include this file directly! */
 
+#include "fuse_common.h"
+
 struct fuse_lowlevel_ops_compat25 {
 	void (*init) (void *userdata);
 	void (*destroy) (void *userdata);
