@@ -19,7 +19,6 @@ Makefile.in
 Makefile
 *.m4
 stamp-h*
-config.*
 /ltmain.sh
 /configure
 /install-sh
