@@ -38,7 +38,7 @@ LOCAL_C_INCLUDES := \
 	external/fuse/include
 
 LOCAL_SHARED_LIBRARIES := \
-	libutils libdl
+	libutils
 
 LOCAL_CFLAGS := \
 	-D_FILE_OFFSET_BITS=64 \
