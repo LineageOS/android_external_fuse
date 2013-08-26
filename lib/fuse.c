@@ -36,6 +36,7 @@
 #include <sys/uio.h>
 #include <sys/time.h>
 #include <sys/mman.h>
+#include <sys/file.h>
 
 #ifdef USE_MODULES
 #include <dlfcn.h>
