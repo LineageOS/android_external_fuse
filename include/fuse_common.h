@@ -15,10 +15,6 @@
 #ifndef _FUSE_COMMON_H_
 #define _FUSE_COMMON_H_
 
-#if defined(__ANDROID__)
-#define _OFF_T_DEFINED_
-#endif
-
 #include "fuse_opt.h"
 #include <stdint.h>
 #include <sys/types.h>
@@ -35,10 +31,6 @@
 /* This interface uses 64 bit off_t */
 #if _FILE_OFFSET_BITS != 64
 #error Please add -D_FILE_OFFSET_BITS=64 to your compile flags!
-#endif
-
-#if defined(__ANDROID__)
-typedef loff_t off_t;
 #endif
 
 #ifdef __cplusplus
