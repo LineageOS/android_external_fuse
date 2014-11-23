@@ -286,7 +286,7 @@ static int check_data(const char *path, const char *data, int offset,
 		PERROR("open");
 		return -1;
 	}
-	if (lseek(fd, offset, SEEK_SET) == (off_t) -1) {
+	if (lseek(fd, offset, SEEK_SET) == (loff_t) -1) {
 		PERROR("lseek");
 		close(fd);
 		return -1;
@@ -324,7 +324,7 @@ static int fcheck_data(int fd, const char *data, int offset,
 {
 	char buf[4096];
 	int res;
-	if (lseek(fd, offset, SEEK_SET) == (off_t) -1) {
+	if (lseek(fd, offset, SEEK_SET) == (loff_t) -1) {
 		PERROR("lseek");
 		return -1;
 	}
@@ -829,7 +829,7 @@ static int do_test_open(int exist, int flags, const char *flags_str, int mode)
 	int err = 0;
 	int res;
 	int fd;
-	off_t off;
+	loff_t off;
 
 	start_test("open(%s, %s, 0%03o)", exist ? "+" : "-", flags_str, mode);
 	unlink(testfile);
@@ -910,7 +910,7 @@ static int do_test_open(int exist, int flags, const char *flags_str, int mode)
 		}
 	}
 	off = lseek(fd, SEEK_SET, 0);
-	if (off == (off_t) -1) {
+	if (off == (loff_t) -1) {
 		PERROR("lseek");
 		err--;
 	} else if (off != 0) {

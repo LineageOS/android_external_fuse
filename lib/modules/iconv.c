@@ -170,7 +170,7 @@ static int iconv_opendir(const char *path, struct fuse_file_info *fi)
 }
 
 static int iconv_dir_fill(void *buf, const char *name,
-			  const struct stat *stbuf, off_t off)
+			  const struct stat *stbuf, loff_t off)
 {
 	struct iconv_dh *dh = buf;
 	char *newname;
@@ -183,7 +183,7 @@ static int iconv_dir_fill(void *buf, const char *name,
 }
 
 static int iconv_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
-			 off_t offset, struct fuse_file_info *fi)
+			 loff_t offset, struct fuse_file_info *fi)
 {
 	struct iconv *ic = iconv_get();
 	char *newpath;
@@ -335,7 +335,7 @@ static int iconv_chown(const char *path, uid_t uid, gid_t gid)
 	return err;
 }
 
-static int iconv_truncate(const char *path, off_t size)
+static int iconv_truncate(const char *path, loff_t size)
 {
 	struct iconv *ic = iconv_get();
 	char *newpath;
@@ -347,7 +347,7 @@ static int iconv_truncate(const char *path, off_t size)
 	return err;
 }
 
-static int iconv_ftruncate(const char *path, off_t size,
+static int iconv_ftruncate(const char *path, loff_t size,
 			   struct fuse_file_info *fi)
 {
 	struct iconv *ic = iconv_get();
@@ -398,7 +398,7 @@ static int iconv_open_file(const char *path, struct fuse_file_info *fi)
 }
 
 static int iconv_read_buf(const char *path, struct fuse_bufvec **bufp,
-			  size_t size, off_t offset, struct fuse_file_info *fi)
+			  size_t size, loff_t offset, struct fuse_file_info *fi)
 {
 	struct iconv *ic = iconv_get();
 	char *newpath;
@@ -411,7 +411,7 @@ static int iconv_read_buf(const char *path, struct fuse_bufvec **bufp,
 }
 
 static int iconv_write_buf(const char *path, struct fuse_bufvec *buf,
-			   off_t offset, struct fuse_file_info *fi)
+			   loff_t offset, struct fuse_file_info *fi)
 {
 	struct iconv *ic = iconv_get();
 	char *newpath;

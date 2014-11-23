@@ -713,7 +713,7 @@ static int get_string_opt(const char *s, unsigned len, const char *opt,
 
 static int do_mount(const char *mnt, char **typep, mode_t rootmode,
 		    int fd, const char *opts, const char *dev, char **sourcep,
-		    char **mnt_optsp, off_t rootsize)
+		    char **mnt_optsp, loff_t rootsize)
 {
 	int res;
 	int flags = MS_NOSUID | MS_NODEV;
