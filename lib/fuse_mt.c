@@ -50,7 +50,7 @@ static int mt_session_exited(void *data)
 	return fuse_session_exited(pd->prevse);
 }
 
-static int mt_chan_receive(struct fuse_chan **chp, char *buf, size_t size)
+static int mt_chan_receive(struct fuse_chan **chp, char *buf, size_t size __unused)
 {
 	struct fuse_cmd *cmd;
 	struct procdata *pd = (struct procdata *) fuse_chan_data(*chp);

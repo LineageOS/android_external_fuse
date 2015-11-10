@@ -2303,12 +2303,12 @@ static const char *opname(enum fuse_opcode opcode)
 static int fuse_ll_copy_from_pipe(struct fuse_bufvec *dst,
 				  struct fuse_bufvec *src)
 {
-	int res = fuse_buf_copy(dst, src, 0);
+	ssize_t res = fuse_buf_copy(dst, src, 0);
 	if (res < 0) {
 		fprintf(stderr, "fuse: copy from pipe: %s\n", strerror(-res));
 		return res;
 	}
-	if (res < fuse_buf_size(dst)) {
+	if (res < (ssize_t)fuse_buf_size(dst)) {
 		fprintf(stderr, "fuse: copy from pipe: short read\n");
 		return -1;
 	}
@@ -2423,7 +2423,7 @@ static void fuse_ll_process_buf(void *data, const struct fuse_buf *buf,
 		mbuf = newmbuf;
 
 		tmpbuf = FUSE_BUFVEC_INIT(buf->size - write_header_size);
-		tmpbuf.buf[0].mem = mbuf + write_header_size;
+		tmpbuf.buf[0].mem = (intptr_t *)mbuf + write_header_size;
 
 		res = fuse_ll_copy_from_pipe(&tmpbuf, &bufv);
 		err = -res;
@@ -2778,7 +2778,7 @@ int fuse_req_getgroups(fuse_req_t req, int size, gid_t list[])
 	char *buf;
 	size_t bufsize = 1024;
 	char path[128];
-	int ret;
+	ssize_t ret;
 	int fd;
 	unsigned long pid = req->ctx.pid;
 	char *s;
@@ -2802,7 +2802,7 @@ retry:
 		goto out_free;
 	}
 
-	if (ret == bufsize) {
+	if (ret == (ssize_t)bufsize) {
 		free(buf);
 		bufsize *= 4;
 		goto retry;

@@ -1771,7 +1771,7 @@ int fuse_fs_read_buf(struct fuse_fs *fs, const char *path,
 {
 	fuse_get_context()->private_data = fs->user_data;
 	if (fs->op.read || fs->op.read_buf) {
-		int res;
+		ssize_t res;
 
 		if (fs->debug)
 			fprintf(stderr,
@@ -1808,7 +1808,7 @@ int fuse_fs_read_buf(struct fuse_fs *fs, const char *path,
 				(unsigned long long) fi->fh,
 				fuse_buf_size(*bufp),
 				(unsigned long long) off);
-		if (res >= 0 && fuse_buf_size(*bufp) > (int) size)
+		if (res >= 0 && fuse_buf_size(*bufp) > size)
 			fprintf(stderr, "fuse: read too many bytes\n");
 
 		if (res < 0)
@@ -4578,7 +4578,7 @@ static int node_table_init(struct node_table *t)
 	return 0;
 }
 
-static void thread_exit_handler(int sig)
+static void thread_exit_handler(int sig __unused)
 {
 	pthread_exit(0);
 }

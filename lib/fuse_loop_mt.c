@@ -63,7 +63,7 @@ static void list_del_worker(struct fuse_worker *w)
 
 static int fuse_loop_start_thread(struct fuse_mt *mt);
 
-static void thread_exit_handler(int sig)
+static void thread_exit_handler(int sig __unused)
 {
 	pthread_exit(0);
 }
