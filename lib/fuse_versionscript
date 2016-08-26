@@ -148,9 +148,10 @@ FUSE_2.7 {
 		fuse_fs_unlink;
 		fuse_fs_utimens;
 		fuse_fs_write;
-		fuse_register_module;
 		fuse_reply_iov;
 		fuse_version;
+	local:
+		fuse_register_module;
 } FUSE_2.6;
 
 FUSE_2.7.5 {
