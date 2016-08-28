@@ -102,6 +102,10 @@ static const struct fuse_opt fuse_mount_opts[] = {
 	FUSE_OPT_KEY("large_read",		KEY_KERN_OPT),
 	FUSE_OPT_KEY("blksize=",		KEY_KERN_OPT),
 	FUSE_OPT_KEY("default_permissions",	KEY_KERN_OPT),
+	FUSE_OPT_KEY("context=",		KEY_KERN_OPT),
+	FUSE_OPT_KEY("fscontext=",		KEY_KERN_OPT),
+	FUSE_OPT_KEY("defcontext=",		KEY_KERN_OPT),
+	FUSE_OPT_KEY("rootcontext=",		KEY_KERN_OPT),
 	FUSE_OPT_KEY("max_read=",		KEY_KERN_OPT),
 	FUSE_OPT_KEY("max_read=",		FUSE_OPT_KEY_KEEP),
 	FUSE_OPT_KEY("user=",			KEY_MTAB_OPT),
@@ -282,7 +286,7 @@ static int receive_fd(int fd)
 	}
 
 	cmsg = CMSG_FIRSTHDR(&msg);
-	if (!cmsg->cmsg_type == SCM_RIGHTS) {
+	if (cmsg->cmsg_type != SCM_RIGHTS) {
 		fprintf(stderr, "got control message of unknown type %d\n",
 			cmsg->cmsg_type);
 		return -1;
